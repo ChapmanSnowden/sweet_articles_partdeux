@@ -1,0 +1,362 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: article_tags; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+CREATE TABLE article_tags (
+    id integer NOT NULL,
+    articles_id integer,
+    tags_id integer
+);
+
+
+ALTER TABLE public.article_tags OWNER TO apprentice;
+
+--
+-- Name: article_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: apprentice
+--
+
+CREATE SEQUENCE article_tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.article_tags_id_seq OWNER TO apprentice;
+
+--
+-- Name: article_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: apprentice
+--
+
+ALTER SEQUENCE article_tags_id_seq OWNED BY article_tags.id;
+
+
+--
+-- Name: articles; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+CREATE TABLE articles (
+    id integer NOT NULL,
+    title character varying(255),
+    description text,
+    url character varying(255),
+    category character varying(255),
+    tags character varying(255),
+    category_id integer
+);
+
+
+ALTER TABLE public.articles OWNER TO apprentice;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: apprentice
+--
+
+CREATE SEQUENCE articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.articles_id_seq OWNER TO apprentice;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: apprentice
+--
+
+ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
+
+
+--
+-- Name: name_categories; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+CREATE TABLE name_categories (
+    category character varying(255)
+);
+
+
+ALTER TABLE public.name_categories OWNER TO apprentice;
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO apprentice;
+
+--
+-- Name: tag_labels; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+CREATE TABLE tag_labels (
+    id integer NOT NULL,
+    unique_tags character varying(255)
+);
+
+
+ALTER TABLE public.tag_labels OWNER TO apprentice;
+
+--
+-- Name: tag_labels_id_seq; Type: SEQUENCE; Schema: public; Owner: apprentice
+--
+
+CREATE SEQUENCE tag_labels_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tag_labels_id_seq OWNER TO apprentice;
+
+--
+-- Name: tag_labels_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: apprentice
+--
+
+ALTER SEQUENCE tag_labels_id_seq OWNED BY tag_labels.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: apprentice
+--
+
+ALTER TABLE ONLY article_tags ALTER COLUMN id SET DEFAULT nextval('article_tags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: apprentice
+--
+
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: apprentice
+--
+
+ALTER TABLE ONLY tag_labels ALTER COLUMN id SET DEFAULT nextval('tag_labels_id_seq'::regclass);
+
+
+--
+-- Data for Name: article_tags; Type: TABLE DATA; Schema: public; Owner: apprentice
+--
+
+COPY article_tags (id, articles_id, tags_id) FROM stdin;
+\.
+
+
+--
+-- Name: article_tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: apprentice
+--
+
+SELECT pg_catalog.setval('article_tags_id_seq', 1, false);
+
+
+--
+-- Data for Name: articles; Type: TABLE DATA; Schema: public; Owner: apprentice
+--
+
+COPY articles (id, title, description, url, category, tags, category_id) FROM stdin;
+1	rerum quaerat quisquam	Quia molestiae maiores. Id adipisci nostrum eveniet saepe ut occaecati. Quis in dignissimos doloribus et. Ratione voluptas quos.	articles/9/3/2013/rerum-quaerat-quisquam	computer world	jquery, art	\N
+2	temporibus magnam consequatur	Facilis voluptatem accusamus. Et numquam dicta molestias fugiat dolorum. Culpa dignissimos nostrum. Similique possimus rerum molestias cumque necessitatibus tenetur. Et dolor quis voluptatibus enim consequatur quia ut.	articles/9/3/2013/temporibus-magnam-consequatur	programming		\N
+3	blanditiis incidunt perferendis	Non sed dignissimos repellat qui accusamus non facilis. Nisi aut enim deserunt ea accusamus neque in. Quia id explicabo soluta eum est ducimus. Libero nemo expedita sit magnam.	articles/9/3/2013/blanditiis-incidunt-perferendis	Sports		\N
+4	illum error nesciunt	In dolor et. Recusandae dolorem sed qui. Temporibus hic corporis ea aspernatur et.	articles/9/3/2013/illum-error-nesciunt	business		\N
+5	aut temporibus rerum	Excepturi libero eveniet molestiae. Voluptatibus repellat nihil et ipsa. Voluptatem qui enim.	articles/9/3/2013/aut-temporibus-rerum	computer-world	ruby, random, tech	\N
+6	a saepe hic	Aliquid est totam repudiandae at velit quia sit. Omnis minus modi rerum et aperiam molestiae quis. Aperiam sit vel.	articles/9/3/2013/a-saepe-hic	Sports	art	\N
+7	dolor in nihil	Voluptatem quas error repellat. Excepturi rem autem aut iure laborum. Sapiente debitis et consequuntur. Voluptas soluta excepturi ipsum cumque animi.	articles/9/3/2013/dolor-in-nihil	sport	cloud, random-tags	\N
+8	occaecati dignissimos iure	Qui aspernatur nobis explicabo. Repellendus rem doloribus et sint sequi totam perferendis. Rerum omnis consectetur animi voluptas ipsum. Ad quisquam sed neque sed doloremque qui. Voluptates earum facilis et est tempore.	articles/9/3/2013/occaecati-dignissimos-iure	Sports	computer, music	\N
+9	vel iste beatae	Sint culpa animi provident ullam et aut. Rerum et sed harum eius laborum. Autem debitis quod ipsum error. Id accusantium ducimus quibusdam fugiat voluptatem et. Nihil temporibus est impedit itaque ratione.	articles/9/3/2013/vel-iste-beatae	programming	rails	\N
+10	error nisi ex	Dicta animi quia officiis. Voluptas amet enim corrupti. Consequatur nemo ducimus aliquid. Asperiores atque reprehenderit qui. Ipsum eos harum quae autem.	articles/9/3/2013/error-nisi-ex	computer-world	computer	\N
+11	rerum sunt suscipit	Architecto et voluptas illum sit eos dolore eaque. Consectetur amet iusto at ut neque corporis. Beatae dolor et quae quia. Quam labore voluptas facere eos explicabo. Corporis quas eveniet velit dicta consequatur corrupti blanditiis.	articles/9/3/2013/rerum-sunt-suscipit	computer-world		\N
+12	eaque id asperiores	Et omnis in officia sit nesciunt enim aut. Dolore quae nisi sed mollitia. Ea et aut et. Possimus dolore omnis molestias mollitia voluptatum.	articles/9/3/2013/eaque-id-asperiores	HEALTH	widget, cloud, rails	\N
+13	sequi aut quam	Tenetur fuga aut doloribus. Culpa accusamus expedita occaecati similique eos deleniti eius. Velit hic autem aperiam nostrum sed. Id eum aut et dolorem. Velit qui praesentium sed.	articles/9/3/2013/sequi-aut-quam	HEALTH	ruby, love	\N
+14	veniam est qui	Tenetur consequatur in sunt vel molestiae ducimus facere. In et amet ducimus qui veniam et magnam. Temporibus odit officia impedit animi.	articles/9/3/2013/veniam-est-qui	Business	love	\N
+15	expedita omnis fuga	Porro nesciunt reiciendis libero. A est corporis officiis rerum et sed maiores. Occaecati voluptatem mollitia nobis earum dolor. Qui officia recusandae. Ut placeat sed.	articles/9/3/2013/expedita-omnis-fuga	computer-world		\N
+16	mollitia ratione dolore	Nesciunt cupiditate est aperiam maiores eos fugiat vitae. Eum illum rerum pariatur. Illum sed sunt et. Voluptatem inventore autem qui necessitatibus quis.	articles/9/3/2013/mollitia-ratione-dolore	computer-world	cloud	\N
+17	minima mollitia ab	Quaerat sed alias soluta ipsam. Iure culpa reprehenderit incidunt omnis quidem. Et perferendis molestiae ut. Ad omnis animi.	articles/9/3/2013/minima-mollitia-ab	Business	widget, cloud	\N
+18	enim sed harum	Ipsum ex voluptate rerum maiores tenetur. Dolorem et ut ab consequatur eos sed ipsam. Deleniti consequatur officia voluptatem quam aliquam possimus qui. Rem perferendis necessitatibus sunt aperiam quae et.	articles/9/3/2013/enim-sed-harum	HEALTH	ruby	\N
+19	voluptas inventore placeat	Delectus occaecati eius ut a odio. Quas porro quo dolor esse velit ipsam. Enim quia nam nobis tempora. Facilis repudiandae similique accusantium quia ea dolores in.	articles/9/3/2013/voluptas-inventore-placeat	computer-world	ruby	\N
+20	dolor fugiat officiis	Cum perferendis possimus. Id rem quis non voluptas veritatis natus enim. Nam quis aut architecto.	articles/9/3/2013/dolor-fugiat-officiis	computer world	widget, love, medicine	\N
+21	ad fugit qui	Ex provident aut omnis culpa eligendi aliquid et. Non asperiores magnam autem aut eos provident. Dicta nulla adipisci molestias beatae qui perferendis quae.	articles/9/3/2013/ad-fugit-qui	computer-world	tech, rails, hate	\N
+22	reprehenderit quaerat qui	Ratione modi omnis et. Accusantium distinctio qui facere et laboriosam. Quam voluptatem enim corporis. Sunt aliquam fugiat error dolores qui possimus et.	articles/9/3/2013/reprehenderit-quaerat-qui	programming	computer	\N
+23	harum dolores deserunt	Doloribus omnis ad velit. Eos qui asperiores ad. Similique nemo rerum facere ullam eveniet soluta. Quaerat odit modi ipsam esse eum neque distinctio.	articles/9/3/2013/harum-dolores-deserunt	computer world	cloud	\N
+24	nobis et quia	Autem provident at sed. Dolore dolores cupiditate dolorem. Sit eos a delectus. Cum mollitia consequatur qui ipsa molestiae est cupiditate. Deserunt autem distinctio nesciunt expedita natus.	articles/9/3/2013/nobis-et-quia	computer-world		\N
+25	sit tempora dolores	Culpa et ea harum magni. Mollitia rerum sint quaerat. Est quo animi laborum. Eos aut laborum sit id at.	articles/9/3/2013/sit-tempora-dolores	business	computer, love	\N
+26	asperiores exercitationem consequatur	Consequatur error veritatis et. Quisquam et ipsam. Pariatur est dolorum.	articles/9/3/2013/asperiores-exercitationem-consequatur	Sports	random	\N
+27	et commodi dolore	Et suscipit cum aut quo cumque veniam. Soluta voluptas dolores nobis consectetur animi. Totam repudiandae voluptatem veritatis illum dolorem voluptas cupiditate. Vero deleniti reprehenderit debitis animi quis voluptas tenetur.	articles/9/3/2013/et-commodi-dolore	HEALTH	cloud, computer, random-tags	\N
+28	quo et et	Tenetur tempora totam. Quo non pariatur ut sed. Quos ratione sit voluptas eligendi accusantium ut. Molestias voluptatum aut.	articles/9/3/2013/quo-et-et	programming	widget, music, ruby	\N
+29	ut et facere	Animi ullam omnis laborum. Voluptatem iste dolor cumque. Illo sequi asperiores. Quibusdam eos dolorem qui rerum inventore ut accusantium.	articles/9/3/2013/ut-et-facere	sport	random-tags, tech	\N
+30	nostrum eaque quod	Itaque eligendi nulla. Autem repudiandae sit quidem perspiciatis. Atque eum rerum amet dolor.	articles/9/3/2013/nostrum-eaque-quod	programming	hate, random-tags	\N
+31	odit in atque	A dolore eius rerum aut eos illo voluptates. Et est praesentium laborum. Illum ipsa numquam dolorem itaque iste.	articles/9/3/2013/odit-in-atque	computer world	random, love, hate	\N
+32	aut ab atque	Est atque est consequatur dolorem rem dolores. Odit in dolores dolor. Perspiciatis odio est fugit facilis.	articles/9/3/2013/aut-ab-atque	sport		\N
+33	accusantium autem quidem	Recusandae illum magnam est. Ab sed nam. Et saepe culpa.	articles/9/3/2013/accusantium-autem-quidem	computer-world	medicine, random, cloud	\N
+34	qui molestias praesentium	Mollitia accusantium rerum. Magni ad atque quia sunt rerum. Quis in dolore cumque id perferendis sint. Voluptates iusto non. Perferendis rem dolores et odio ipsam.	articles/9/3/2013/qui-molestias-praesentium	programming		\N
+35	quaerat expedita dolorem	Iure et dolorem magnam officiis aut quia nihil. Repudiandae eligendi recusandae eveniet dignissimos. Dolores qui ea id. Iste labore quasi.	articles/9/3/2013/quaerat-expedita-dolorem	Business		\N
+36	earum omnis tenetur	Aliquam qui facilis aspernatur alias. Perferendis occaecati maiores velit. Recusandae iusto eum iure rerum qui. Beatae reprehenderit consequatur aut eaque. Voluptas officia veritatis.	articles/9/3/2013/earum-omnis-tenetur	sport	medicine, random-tags	\N
+37	molestiae fugiat est	Aut eum enim et maiores ut magni aliquam. Velit autem cum sit qui. Pariatur fuga assumenda quia dicta necessitatibus id. Aut vero iusto illum. Nisi aspernatur velit nam.	articles/9/3/2013/molestiae-fugiat-est	Sports	ruby, cloud, random	\N
+38	occaecati quae repellendus	Magni esse exercitationem odio. Occaecati ex ea dolores enim. Velit expedita sapiente.	articles/9/3/2013/occaecati-quae-repellendus	business		\N
+39	unde doloribus ipsa	Placeat id consectetur perspiciatis nesciunt eveniet. Harum hic est dignissimos ad earum. Culpa officiis iusto cumque inventore ratione voluptas.	articles/9/3/2013/unde-doloribus-ipsa	business	random, rails, ruby	\N
+40	hic ipsam inventore	Quam ab et perferendis ullam esse fugit voluptas. Non rem qui aperiam omnis aut. Ut non dignissimos.	articles/9/3/2013/hic-ipsam-inventore	computer-world	love, cloud, widget	\N
+41	at sit magnam	Quam ex sint nulla rerum quia. Magni eos modi ea est vitae accusamus. Voluptate a repudiandae. Quia eveniet cum iste distinctio est id. Quod sed dolores unde esse dolores laudantium.	articles/9/3/2013/at-sit-magnam	business		\N
+42	id delectus nam	Natus dolores autem a ex et eos. Maiores laboriosam quis. Eligendi iusto est eos. Accusantium cupiditate ratione numquam quam ullam nisi. Ut est aliquam minima et id consequatur ut.	articles/9/3/2013/id-delectus-nam	Sports	medicine, music, hate	\N
+43	porro et ipsum	Velit molestiae molestiae. Aut porro accusantium consequuntur. Consectetur quae laudantium. Fugit incidunt dolores cupiditate autem enim. Enim nesciunt aspernatur qui cupiditate.	articles/9/3/2013/porro-et-ipsum	Business	random-tags, love, cloud	\N
+44	dolorem sint tempora	Excepturi eius fugiat et iste odio architecto. Animi ullam quia sit ratione omnis debitis minima. Ut minus aperiam quaerat sunt et quis. Et occaecati ea ut culpa accusantium. Omnis dolores officiis.	articles/9/3/2013/dolorem-sint-tempora	Sports		\N
+45	repellendus ut nisi	Sunt aperiam illum voluptatem laudantium id. Et et molestiae quam. Ratione ipsum dolorem est ut nam tempore. Minima nemo vero. Consequatur atque laborum non doloribus consequatur.	articles/9/3/2013/repellendus-ut-nisi	computer-world	tech, hate	\N
+46	porro dolores voluptates	Voluptatum aut non recusandae aperiam mollitia corrupti. Quo reprehenderit qui porro dolores similique. Officia magni velit veritatis suscipit.	articles/9/3/2013/porro-dolores-voluptates	HEALTH	love, random-tags	\N
+47	quasi cumque ullam	Sed molestias libero. Tempore molestiae quia laboriosam dolor ut perferendis. Reiciendis sequi dolor numquam. Sequi debitis hic ab error temporibus. Quibusdam qui debitis placeat alias.	articles/9/3/2013/quasi-cumque-ullam	programming	art, computer	\N
+48	est fuga accusantium	Aperiam dolore alias molestiae. Tempora odit molestiae. Temporibus perferendis est ipsa veritatis mollitia. Impedit minus et vero.	articles/9/3/2013/est-fuga-accusantium	sport	cloud, tech	\N
+49	officiis magni sed	Provident molestiae rem. Dolorum inventore ratione velit quo accusamus excepturi qui. Quos error sit nihil rerum iusto libero et. Aut ex non. Deserunt consectetur praesentium autem alias cum occaecati nam.	articles/9/3/2013/officiis-magni-sed	HEALTH	ruby, widget, love	\N
+50	fugit et maiores	Corporis assumenda consequatur totam ut. Iste deleniti asperiores odit. Eius id quis. Sit libero eum magnam accusantium rerum sit. Laborum repellat nesciunt.	articles/9/3/2013/fugit-et-maiores	computer world	random, cloud	\N
+\.
+
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: apprentice
+--
+
+SELECT pg_catalog.setval('articles_id_seq', 50, true);
+
+
+--
+-- Data for Name: name_categories; Type: TABLE DATA; Schema: public; Owner: apprentice
+--
+
+COPY name_categories (category) FROM stdin;
+HEALTH
+programming
+Sports
+computer world
+Business
+business
+computer-world
+sport
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: apprentice
+--
+
+COPY schema_migrations (version) FROM stdin;
+20130311183138
+20130903144758
+20130903145648
+20130903151228
+20130903152349
+20130903152756
+\.
+
+
+--
+-- Data for Name: tag_labels; Type: TABLE DATA; Schema: public; Owner: apprentice
+--
+
+COPY tag_labels (id, unique_tags) FROM stdin;
+1	jquery
+2	art
+3	ruby
+4	random
+5	tech
+6	cloud
+7	random-tags
+8	computer
+9	music
+10	rails
+11	widget
+12	love
+13	medicine
+14	hate
+\.
+
+
+--
+-- Name: tag_labels_id_seq; Type: SEQUENCE SET; Schema: public; Owner: apprentice
+--
+
+SELECT pg_catalog.setval('tag_labels_id_seq', 14, true);
+
+
+--
+-- Name: article_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+ALTER TABLE ONLY article_tags
+    ADD CONSTRAINT article_tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: articles_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+ALTER TABLE ONLY articles
+    ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_labels
+    ADD CONSTRAINT tag_labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: apprentice
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM apprentice;
+GRANT ALL ON SCHEMA public TO apprentice;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
