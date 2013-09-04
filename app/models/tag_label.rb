@@ -1,3 +1,3 @@
 class TagLabel < ActiveRecord::Base
-  belongs_to :article
+  has_many :articles, through: :article_tags
 end

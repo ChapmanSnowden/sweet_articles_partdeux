@@ -1,7 +1,8 @@
 class Article < ActiveRecord::Base
   before_create :set_url
-  has_many :tag_labels
+  has_many :tag_labels, through: :article_tags
   belongs_to :category
+  
   
   private
   def set_url
